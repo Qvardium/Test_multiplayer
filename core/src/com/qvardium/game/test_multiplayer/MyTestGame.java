@@ -17,6 +17,7 @@ public class MyTestGame extends Game {
 	Viewport viewport;
 	AssetManager assetManager;
 	BitmapFont font;
+	boolean inGame;
 
 	public static ForGooglePlayService googlePlayService;
 	Array<Player> players;
@@ -58,7 +59,8 @@ public class MyTestGame extends Game {
 		cam = new OrthographicCamera();
 		viewport = new FitViewport(1280,768,cam);
 		you_invate = false;
-		setScreen(new MenuScreen(this));
+		inGame=false;
+		setScreen(new GamesScreen(this));
 	}
 
 	public void updateGameWorld(float x, float y, String id) {
