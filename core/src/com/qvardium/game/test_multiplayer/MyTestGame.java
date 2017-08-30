@@ -18,6 +18,7 @@ public class MyTestGame extends Game {
 	AssetManager assetManager;
 	BitmapFont font;
 	boolean inGame;
+	boolean load_game;
 
 	public static ForGooglePlayService googlePlayService;
 	Array<Player> players;
@@ -60,6 +61,7 @@ public class MyTestGame extends Game {
 		viewport = new FitViewport(1280,768,cam);
 		you_invate = false;
 		inGame=false;
+		load_game=false;
 		setScreen(new GamesScreen(this));
 	}
 
