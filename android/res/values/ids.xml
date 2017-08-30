@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_id">909299720326</string>
+    <string name="package_name">com.qvardium.game.test_multiplayer</string>
+    <integer name="google_play_services_version">11020000</integer>
+</resources>
