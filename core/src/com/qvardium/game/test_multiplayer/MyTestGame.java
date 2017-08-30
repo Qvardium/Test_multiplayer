@@ -58,7 +58,7 @@ public class MyTestGame extends Game {
 		cam = new OrthographicCamera();
 		viewport = new FitViewport(1280,768,cam);
 		you_invate = false;
-		setScreen(new MenuScreen(this));
+		setScreen(new GamesScreen(this));
 	}
 
 	public void updateGameWorld(float x, float y, String id) {

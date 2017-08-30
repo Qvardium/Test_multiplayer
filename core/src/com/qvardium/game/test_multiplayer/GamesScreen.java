@@ -14,6 +14,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,8 +24,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * Created by Qvardium on 04.07.2017.
  */
 
-public class MenuScreen extends ScreenAdapter {
+public class GamesScreen extends ScreenAdapter {
 
+    //---------for menu--------------------
     SpriteBatch batch;
     OrthographicCamera cam;
     Viewport viewport;
@@ -32,8 +35,14 @@ public class MenuScreen extends ScreenAdapter {
     MyTestGame game;
     AssetManager assetManager;
     BitmapFont font;
+    TextureAtlas forMenuTexture;
+    //-------- for game--------------------
+    String myID;
+    ImageTextButton send;
+    TextField tf;
+    Label label;
 
-    public MenuScreen(MyTestGame gg){
+    public GamesScreen(MyTestGame gg){
         batch = gg.batch;
         cam = gg.cam;
         viewport = gg.viewport;
@@ -44,8 +53,9 @@ public class MenuScreen extends ScreenAdapter {
         assetManager.load("ui_menu.pack",TextureAtlas.class);
         assetManager.finishLoading();
 
-        TextureAtlas forMenuTexture = assetManager.get("ui_menu.pack",TextureAtlas.class);
+        forMenuTexture = assetManager.get("ui_menu.pack",TextureAtlas.class);
 
+        //----------font----------------
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("timesbd.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 50;
@@ -53,9 +63,28 @@ public class MenuScreen extends ScreenAdapter {
 
         generator.scaleToFitSquare(1,1,2);
 
-        font = generator.generateFont(parameter); // font size 12 pixels
+        font = generator.generateFont(parameter);
         generator.dispose();
+        //--------------------------------
 
+
+        stage = new Stage(viewport, batch);
+
+
+        stage.addActor(signIn);
+        stage.addActor(signOut);
+        stage.addActor(quickGame);
+        stage.addActor(selectGame);
+        stage.addActor(invatePl);
+        stage.addActor(seeInv);
+
+        Gdx.input.setInputProcessor(stage);
+        if(game.googlePlayService.isSignedIn()) signIn.setVisible(false);
+        if(!game.googlePlayService.isSignedIn()) signOut.setVisible(false);
+        if(!game.isYou_invate()) invatePl.setVisible(false);
+    }
+
+    void for_menu_load(){
         signIn = new ImageTextButton("Connect",
                 new ImageTextButton.ImageTextButtonStyle
                         (new TextureRegionDrawable(forMenuTexture.findRegion("button")),
@@ -98,23 +127,7 @@ public class MenuScreen extends ScreenAdapter {
         selectGame.setPosition(700,300);
         invatePl.setPosition(100,100);
         seeInv.setPosition(700,100);
-
-        stage = new Stage(viewport, batch);
-
-
-        stage.addActor(signIn);
-        stage.addActor(signOut);
-        stage.addActor(quickGame);
-        stage.addActor(selectGame);
-        stage.addActor(invatePl);
-        stage.addActor(seeInv);
-
-        Gdx.input.setInputProcessor(stage);
-        if(game.googlePlayService.isSignedIn()) signIn.setVisible(false);
-        if(!game.googlePlayService.isSignedIn()) signOut.setVisible(false);
-        if(!game.isYou_invate()) invatePl.setVisible(false);
     }
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.5f, 0, 0.5f, 1);
