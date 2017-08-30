@@ -112,7 +112,7 @@ public class GSGameHelper extends GameHelper implements RoomUpdateListener, Real
                 BaseGameUtils.showAlert(activity, "Отмена");
             }else if(mParticipants.size()>=2){
                 BaseGameUtils.showAlert(activity, "Создание игры");
-                this.game.setScreen(new GameScreen(game));
+                game.inGame=true;
             }
 
         }
