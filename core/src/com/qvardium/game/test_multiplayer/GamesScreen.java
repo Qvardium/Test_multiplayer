@@ -84,7 +84,7 @@ public class GamesScreen extends ScreenAdapter {
         if(!game.googlePlayService.isSignedIn()) signOut.setVisible(false);
         if(!game.isYou_invate()) invatePl.setVisible(false);
         
-        for_game_load();
+
     }
 
     void for_game_load() {
@@ -146,6 +146,8 @@ public class GamesScreen extends ScreenAdapter {
         send.setVisible(false);
         label.setVisible(false);
 
+        game.inGame=true;
+        game.load_game=false;
     }
 
     void for_menu_load(){
@@ -199,6 +201,8 @@ public class GamesScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.5f, 0, 0.5f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(game.load_game) for_game_load();
 
         if(game.inGame) for_game();
         else for_menu();
