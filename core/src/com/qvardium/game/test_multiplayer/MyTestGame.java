@@ -18,7 +18,6 @@ public class MyTestGame extends Game {
 	Viewport viewport;
 	AssetManager assetManager;
 	BitmapFont font;
-	int myIndex;
 	boolean inGame;
 	boolean load_game;
 
@@ -54,7 +53,6 @@ public class MyTestGame extends Game {
 		you_invate = false;
 		inGame=false;
 		load_game=false;
-		myIndex=0;
 		setScreen(new GamesScreen(this));
 	}
 

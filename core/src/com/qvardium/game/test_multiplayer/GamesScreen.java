@@ -33,6 +33,7 @@ public class GamesScreen extends ScreenAdapter {
     BitmapFont font;
     TextureAtlas forMenuTexture;
     //-------- for game--------------------
+    String myID;
 
     public GamesScreen(MyTestGame gg){
         batch = gg.batch;
@@ -75,11 +76,10 @@ public class GamesScreen extends ScreenAdapter {
         colors[4] = Color.FOREST;
 
         int ss=game.googlePlayService.getPlayers();
-        String myID = game.googlePlayService.getMyID();
+        myID = game.googlePlayService.getMyID();
 
         for(int ii=0;ii<ss;ii++){
             game.players.add(new Player(100*(ii+1),100,colors[ii],ids[ii],ii));
-            if(myID.equals(game.players.get(ii).getID())) game.myIndex=ii;
         }
 
 
@@ -215,9 +215,9 @@ public class GamesScreen extends ScreenAdapter {
         batch.setProjectionMatrix(cam.combined);
         if(Gdx.input.isTouched()){
             for (Player p: game.players) {
-                if(p.getIndex()==game.myIndex){
-                    p.setPosition(Gdx.input.getX(),Gdx.input.getY()-768);
-                    game.googlePlayService.sendPos(Gdx.input.getX(),Gdx.input.getY()-768);
+                if(p.getID().equals(myID)){
+                    p.setPosition(Gdx.input.getX(),Gdx.input.getY()-384);
+                    game.googlePlayService.sendPos(Gdx.input.getX(),Gdx.input.getY()-384);
                 }
             }
         }
