@@ -205,7 +205,7 @@ public class GamesScreen extends ScreenAdapter {
         else if(selectGame.isPressed()){
             selectGame.getClickListener().cancel();
             if(game.googlePlayService.isSignedIn()) game.googlePlayService.initMatch();
-            //game.setScreen(new GameScreen(game));
+            //game.load_game=true;
         }
         else if(invatePl.isPressed()){
             invatePl.getClickListener().cancel();
@@ -223,7 +223,7 @@ public class GamesScreen extends ScreenAdapter {
         batch.setProjectionMatrix(cam.combined);
         if(Gdx.input.isTouched()){
             float x=Gdx.input.getX()*scaleX;
-            float y=Gdx.input.getY()*scaleY;
+            float y=768-(Gdx.input.getY()*scaleY);
             for (Player p: game.players) {
                 if(p.getID().equals(myID)){
                     p.setPosition(x,y);
@@ -240,7 +240,9 @@ public class GamesScreen extends ScreenAdapter {
 
         batch.end();
 
-        label.setText("X="+Gdx.input.getX()+"\nY="+Gdx.input.getY());
+        label.setText("X="+Gdx.input.getX()+
+                "\nY="+Gdx.input.getY()+
+                "\nW="+Gdx.graphics.getWidth()+" H="+Gdx.graphics.getHeight());
     }
 
     @Override

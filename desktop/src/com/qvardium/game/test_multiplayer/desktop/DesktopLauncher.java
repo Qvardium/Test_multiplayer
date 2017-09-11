@@ -71,10 +71,6 @@ public class DesktopLauncher {
 
 			}
 
-			@Override
-			public void sendText(String ss) {
-
-			}
 		};
 
 		config.width=1280;
