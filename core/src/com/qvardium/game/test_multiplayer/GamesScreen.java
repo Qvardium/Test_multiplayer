@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.qvardium.game.test_multiplayer.objects.Player;
@@ -34,6 +35,7 @@ public class GamesScreen extends ScreenAdapter {
     TextureAtlas forMenuTexture;
     //-------- for game--------------------
     String myID;
+    Label label;
 
     public GamesScreen(MyTestGame gg){
         batch = gg.batch;
@@ -93,6 +95,10 @@ public class GamesScreen extends ScreenAdapter {
         selectGame.setVisible(false);
         invatePl.setVisible(false);
         seeInv.setVisible(false);
+
+        label = new Label("",new Label.LabelStyle(font,Color.GREEN));
+        label.setPosition(50,680);
+        stage.addActor(label);
     }
 
     void for_menu_load(){
@@ -216,19 +222,21 @@ public class GamesScreen extends ScreenAdapter {
         if(Gdx.input.isTouched()){
             for (Player p: game.players) {
                 if(p.getID().equals(myID)){
-                    p.setPosition(Gdx.input.getX(),Gdx.input.getY()-384);
-                    game.googlePlayService.sendPos(Gdx.input.getX(),Gdx.input.getY()-384);
+                    p.setPosition(Gdx.input.getX(),Gdx.input.getY());
+                    game.googlePlayService.sendPos(Gdx.input.getX(),Gdx.input.getY());
                 }
             }
         }
 
         batch.begin();
 
-        for(Player p: game.players){
-            p.draw(batch);
+        for(int i =0;i<game.players.size;i++){
+            game.players.get(i).draw(batch);
         }
 
         batch.end();
+
+        label.setText("X="+Gdx.input.getX()+"\nY="+Gdx.input.getY());
     }
 
     @Override
