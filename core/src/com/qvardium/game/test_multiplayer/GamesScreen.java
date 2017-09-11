@@ -37,6 +37,8 @@ public class GamesScreen extends ScreenAdapter {
     String myID;
     Label label;
 
+    final float scaleX,scaleY;
+
     public GamesScreen(MyTestGame gg){
         batch = gg.batch;
         cam = gg.cam;
@@ -65,6 +67,8 @@ public class GamesScreen extends ScreenAdapter {
         //----подгружаем все необходимое для меню
         for_menu_load();
 
+        scaleX = 1280/Gdx.graphics.getWidth();
+        scaleY = 768/Gdx.graphics.getHeight();
     }
 
     void for_game_load() {
@@ -83,8 +87,6 @@ public class GamesScreen extends ScreenAdapter {
         for(int ii=0;ii<ss;ii++){
             game.players.add(new Player(100*(ii+1),100,colors[ii],ids[ii],ii));
         }
-
-
 
         game.inGame=true;
         game.load_game=false;
@@ -220,10 +222,12 @@ public class GamesScreen extends ScreenAdapter {
         cam.update();
         batch.setProjectionMatrix(cam.combined);
         if(Gdx.input.isTouched()){
+            float x=Gdx.input.getX()*scaleX;
+            float y=Gdx.input.getY()*scaleY;
             for (Player p: game.players) {
                 if(p.getID().equals(myID)){
-                    p.setPosition(Gdx.input.getX(),Gdx.input.getY());
-                    game.googlePlayService.sendPos(Gdx.input.getX(),Gdx.input.getY());
+                    p.setPosition(x,y);
+                    game.googlePlayService.sendPos(x,y);
                 }
             }
         }

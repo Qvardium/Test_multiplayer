@@ -57,9 +57,10 @@ public class MyTestGame extends Game {
 	}
 
 	public void updateGameWorld(float x, float y, String id) {
-		for (Player p: players) {
-			if(p.getID().equals(id)){
-				p.setPosition(x,y);
+
+		for (int i=0;i<players.size;i++) {
+			if(players.get(i).getID().equals(id)){
+				players.get(i).setPosition(x,y);
 			}
 		}
 	}
@@ -71,10 +72,10 @@ public class MyTestGame extends Game {
 	}
 
 	public void deletPlayer(String id){
-		for(Player p: players){
-			if(p.getID().equals(id)) {
-				p.getTexture().dispose();
-				players.removeIndex(p.getIndex());
+		for(int i=0;i<players.size;i++){
+			if(players.get(i).getID().equals(id)) {
+				players.get(i).getTexture().dispose();
+				players.removeIndex(i);
 			}
 		}
 	}
