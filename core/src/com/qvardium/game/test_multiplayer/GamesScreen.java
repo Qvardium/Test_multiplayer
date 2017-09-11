@@ -67,8 +67,8 @@ public class GamesScreen extends ScreenAdapter {
         //----подгружаем все необходимое для меню
         for_menu_load();
 
-        scaleX = 1280/Gdx.graphics.getWidth();
-        scaleY = 768/Gdx.graphics.getHeight();
+        scaleX = 1280f/Gdx.graphics.getWidth();
+        scaleY = 768f/Gdx.graphics.getHeight();
     }
 
     void for_game_load() {
