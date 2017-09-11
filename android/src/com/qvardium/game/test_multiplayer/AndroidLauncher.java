@@ -156,9 +156,5 @@ public class AndroidLauncher extends AndroidApplication implements ForGooglePlay
 		_gameHelper.asceptIn();
 	}
 
-	@Override
-	public void sendText(String ss) {
-		_gameHelper.sendText(ss);
-	}
 
 }

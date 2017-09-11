@@ -331,11 +331,11 @@ public class GSGameHelper extends GameHelper implements RoomUpdateListener, Real
             y = bf.getFloat();
             game.updateGameWorld(x,y,rtm.getSenderParticipantId());
         }
-        else if(a==0f){
-            byte[] aa = rtm.getMessageData();
-            for(int i=1;i<aa.length;i++) aa[i]=bf.array()[i+1];
-            game.setString(new String(aa));
-        }
+//        else if(a==0f){
+//            byte[] aa = rtm.getMessageData();
+//            for(int i=1;i<aa.length;i++) aa[i]=bf.array()[i+1];
+//            game.setString(new String(aa));
+//        }
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.qvardium.game.test_multiplayer.objects.Player;
 
 public class MyTestGame extends Game {
 
@@ -17,21 +18,13 @@ public class MyTestGame extends Game {
 	Viewport viewport;
 	AssetManager assetManager;
 	BitmapFont font;
+	int myIndex;
 	boolean inGame;
 	boolean load_game;
 
 	public static ForGooglePlayService googlePlayService;
 	Array<Player> players;
 
-	public String getString() {
-		return string;
-	}
-
-	public void setString(String string) {
-		this.string = string;
-	}
-
-	String string="";
 
 	public boolean isYou_invate() {
 		return you_invate;
@@ -51,7 +44,6 @@ public class MyTestGame extends Game {
 		players = new Array<Player>();
 		assetManager=new AssetManager();
 
-
 	}
 
 	@Override
@@ -62,26 +54,30 @@ public class MyTestGame extends Game {
 		you_invate = false;
 		inGame=false;
 		load_game=false;
+		myIndex=0;
 		setScreen(new GamesScreen(this));
 	}
 
 	public void updateGameWorld(float x, float y, String id) {
-		for(int i = 0; i<players.size;i++){
-			if(players.get(i).myId.hashCode()==id.hashCode()){
-				players.get(i).setPosition(x,y);
+		for (Player p: players) {
+			if(p.getID().equals(id)){
+				p.setPosition(x,y);
 			}
 		}
 	}
 
 	public void addPlayer(String id){
 
-		players.add(new Player(100,100, Color.GREEN,id));
+		players.add(new Player(100,100, Color.GREEN,id,players.size));
 
 	}
 
 	public void deletPlayer(String id){
-		for(int i=0;i<players.size;i++){
-			if(players.get(i).myId.hashCode()==id.hashCode()) players.removeIndex(i);
+		for(Player p: players){
+			if(p.getID().equals(id)) {
+				p.getTexture().dispose();
+				players.removeIndex(p.getIndex());
+			}
 		}
 	}
 

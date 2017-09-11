@@ -17,5 +17,5 @@ public interface ForGooglePlayService {
     public String getMyID();
     public void seeInovation();
     public void asceptInv();
-    public void sendText(String ss);
+
 }

@@ -1,4 +1,4 @@
-package com.qvardium.game.test_multiplayer;
+package com.qvardium.game.test_multiplayer.objects;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -11,12 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player {
     float x,y;
+    int index;
     Color color;
     String myId;
     Texture texture;
     Pixmap pixmap;
 
-    public Player(float xx,float yy, Color c, String id){
+    public Player(float xx,float yy, Color c, String id, int index){
+        this.index=index;
         x=xx;
         y=yy;
         color=c;
@@ -37,5 +39,17 @@ public class Player {
     public void setPosition(float xxx, float yyy){
         x=xxx;
         y=yyy;
+    }
+
+    public String getID(){
+        return myId;
+    }
+
+    public Texture getTexture(){
+        return texture;
+    }
+
+    public int getIndex(){
+        return index;
     }
 }
